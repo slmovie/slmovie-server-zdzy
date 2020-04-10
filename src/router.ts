@@ -1,7 +1,8 @@
 import express from "express"
-import { findOneByID } from "./mongodb/find"
-import { FindOneCallback } from "./typing/callback-typing";
+import { findOneByID, findAll } from "./mongodb/find"
+import { FindOneCallback, SearchCallback } from "./typing/callback-typing";
 import { IMovieDetail } from "./typing/detail-typing";
+import { log } from "./utils/log-utils";
 const router = express.Router();
 
 router.get('/detail', async (req, res) => {
@@ -14,6 +15,24 @@ router.get('/detail', async (req, res) => {
         res.json(callBack)
     } catch (error) {
         const callBack: FindOneCallback = {
+            status: 0,
+            result: undefined
+        }
+        res.json(callBack)
+    }
+})
+
+router.get('/search', async (req, res) => {
+    try {
+        const qs = new RegExp(String(req.query.name).toString());
+        const doc = await findAll(qs)
+        const callBack: SearchCallback = {
+            status: 0,
+            result: doc as unknown as IMovieDetail[]
+        }
+        res.json(callBack)
+    } catch (error) {
+        const callBack: SearchCallback = {
             status: 0,
             result: undefined
         }
