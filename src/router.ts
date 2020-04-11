@@ -1,7 +1,8 @@
 import express from "express"
 import { findOneByID, findAll } from "./mongodb/find"
-import { FindOneCallback, SearchCallback } from "./typing/callback-typing";
+import { FindOneCallback, SearchCallback, HotMoviesCallback } from "./typing/callback-typing";
 import { IMovieDetail } from "./typing/detail-typing";
+import { getHot } from "./mongodb/home-get"
 import { log } from "./utils/log-utils";
 const router = express.Router();
 
@@ -33,6 +34,23 @@ router.get('/search', async (req, res) => {
         res.json(callBack)
     } catch (error) {
         const callBack: SearchCallback = {
+            status: 0,
+            result: undefined
+        }
+        res.json(callBack)
+    }
+})
+
+router.get("/index/hot", async (req, res) => {
+    try {
+        const doc = await getHot()
+        const callBack: HotMoviesCallback = {
+            status: 0,
+            result: doc as unknown as IMovieDetail[]
+        }
+        res.json(callBack)
+    } catch (error) {
+        const callBack: HotMoviesCallback = {
             status: 0,
             result: undefined
         }

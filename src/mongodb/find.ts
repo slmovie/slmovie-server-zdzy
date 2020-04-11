@@ -1,6 +1,5 @@
 import { IMovieDetail } from '../typing/detail-typing'
-import { MoviesDB, MovieModel } from './detail/detail-con'
-import { log } from '../utils/log-utils'
+import { MoviesDB, MovieModel } from './constant'
 import { Document } from 'mongoose'
 
 export function findOneByID(id: string) {
