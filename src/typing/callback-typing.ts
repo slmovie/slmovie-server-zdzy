@@ -16,3 +16,7 @@ export interface SearchCallback extends Callback {
 export interface HotMoviesCallback extends Callback {
     result: IMovieDetail[] | undefined
 }
+
+export interface NewMoviesCallback extends Callback {
+    result: IMovieDetail[] | undefined
+}
