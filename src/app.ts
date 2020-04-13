@@ -13,7 +13,7 @@ app.all("*", function (req, res, next) {
 });
 
 app.use(compression())
-app.use(express.static("web"));
+app.use(express.static("web/build"));
 app.use(router)
 
 app.listen(3010);
