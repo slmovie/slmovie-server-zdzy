@@ -17,7 +17,7 @@ app.use(compression())
 app.use(express.static("web/build"));
 app.use(router)
 app.use("*", (request, response) => {
-  response.sendFile(path.resolve(__dirname, "../web/index.html"));
+  response.sendFile(path.resolve(__dirname, "../web/build/index.html"));
 });
 
 app.listen(3010);
