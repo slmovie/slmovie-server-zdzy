@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch 'src/' -e ts --exec ts-node ./src/app.ts",
-    "start-pm2": "tsc && pm2 start ./build/app.js"
+    "start-pm2": "sudo rm -rf build && tsc && pm2 start ./build/app.js"
   },
   "dependencies": {
     "@types/compression": "^1.7.0",
